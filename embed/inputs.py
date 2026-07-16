@@ -1,14 +1,21 @@
-"""Load papers from literatureReview/data/review.db, READ-ONLY.
+"""Load papers from this project's data/review.db, READ-ONLY.
 
 review.db is the sole source of paper metadata. Opened with mode=ro so a build can
 never mutate it. Dedup key is the DOI, falling back to nodoi-<sha256(filename)> for
-rows with no DOI (7 of 106), so renamed files never re-ingest as duplicates.
+rows with no DOI, so renamed files never re-ingest as duplicates.
 """
 import hashlib
 import os
 import sqlite3
 
-REVIEW_DB = os.path.expanduser("~/phd/literatureReview/data/review.db")
+# Local copy of review.db lives in this project's data/ dir (copied from
+# literatureReview, then extended in place by pass 1). Resolved relative to
+# this file so it is independent of the current working directory, mirroring
+# build.py's OUT_DB. corpusEmbed reads it read-only; pass 1 (extractor.run)
+# is the only writer. Override with --review-db if needed.
+REVIEW_DB = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)), "data", "review.db"
+)
 
 
 class Paper:
