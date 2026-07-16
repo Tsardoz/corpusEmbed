@@ -1,0 +1,146 @@
+# Authoritative bucket definitions for corpus embedding and classification.
+# Six topical buckets. classification code should read bucket text and the
+# folder mapping from here rather than duplicating it.
+#
+# description is what gets embedded, so it is written like the content of a
+# representative paper, in the vocabulary those papers use. The first three
+# keywords lead because they feed the SPECTER2 synthetic title.
+#
+# floor: cosine-similarity cutoff on the top bucket score. Below this, a
+# paper is routed to "unclassified" instead of being force-assigned. SPECTER2
+# scores are compressed into roughly 0.80 to 0.96, so a floor of 0.5 is inert
+# and nothing lands near it; it is retained as a harmless safety net, not as a
+# working discriminator. Read the full score vector, not the winning label.
+floor: 0.5
+
+unclassified_folder: unclassified
+
+buckets:
+  ai_scheduling:
+    folder: bucket1
+    keywords:
+      - irrigation scheduling
+      - machine learning
+      - decision support
+      - reinforcement learning
+      - soil water balance
+      - crop water requirement
+    description: >
+      Data-driven methods for deciding irrigation timing and volume in
+      crops, and for predicting the reference or crop evapotranspiration
+      inputs that scheduling depends on. Machine learning, deep learning,
+      transformer and attention-based architectures, physics-informed
+      neural networks, and reinforcement learning models predict soil
+      water deficit, soil moisture, crop water demand, reference
+      evapotranspiration, and irrigation depth from weather, soil
+      moisture, and remote sensing inputs. Includes model-predictive
+      control, mixed-integer optimization, and forecast-driven scheduling,
+      and comparisons of learned schedulers against threshold, checkbook,
+      and FAO-56 water-balance baselines, evaluated on water use
+      efficiency and yield.
+
+  remote_sensing_kc_et:
+    folder: bucket2
+    keywords:
+      - crop coefficient
+      - evapotranspiration
+      - canopy temperature
+      - NDVI
+      - surface energy balance
+      - thermal remote sensing
+    description: >
+      Remote sensing estimation of crop water status from satellite and UAV
+      imagery. NDVI-derived crop coefficients, evapotranspiration from
+      surface energy balance models such as SEBAL, METRIC, TSEB and ALEXI,
+      evapotranspiration partitioning, and canopy or crop water stress
+      indices from land surface temperature and thermal infrared. Includes
+      validation and accuracy of these retrievals and their behaviour under
+      sparse canopy cover and cloud.
+
+  leakage_methodology:
+    folder: bucket3
+    keywords:
+      - data leakage
+      - cross-validation
+      - spatial autocorrelation
+      - reproducibility
+      - temporal leakage
+      - model evaluation
+    description: >
+      Methodological critiques of machine learning evaluation in applied
+      and environmental science. Data leakage from random train-test
+      splitting of autocorrelated time series or spatially clustered data,
+      block and subject-independent cross-validation, temporal look-ahead
+      bias, batch effects, confounding and Clever Hans effects, and
+      overinterpretation of reported model performance. Frameworks and
+      audits establishing that reported accuracy is inflated by validation
+      error.
+
+  crop_water_stress_physiology:
+    folder: bucket4
+    keywords:
+      - deficit irrigation
+      - water stress
+      - phenology
+      - perennial crops
+      - almond
+      - olive
+    description: >
+      Physiological response of perennial orchard and vine crops,
+      especially olive, almond, and grapevine, to water availability,
+      vapor pressure deficit, and climate, and its timing across
+      phenological stages. Dormant-season and early-spring water effects,
+      chilling requirement and flowering phenology models, regulated
+      deficit irrigation and stage-specific water sensitivity, crop
+      coefficient variability across regions and years, trunk dendrometer
+      and stem water potential stress indicators, and phenology-based
+      alignment of growing-season water response. Includes studies of
+      cultivation in non-traditional or low-latitude growing regions.
+
+  methods_background:
+    folder: bucket5
+    keywords:
+      - Bayesian regression
+      - functional data analysis
+      - splines
+      - scalar-on-function regression
+      - partial least squares
+      - hierarchical models
+      - agricultural modelling
+    description: >
+      Statistical and machine learning methodology as applied to
+      agricultural, crop, or environmental modelling problems, or cited as
+      general methodological background for such models. Bayesian
+      hierarchical and functional regression, partial least squares,
+      penalized spline and P-spline smoothing, scalar-on-function and
+      functional data models, partial pooling and random effects, and
+      model selection criteria for crop yield, phenology, or climate-driver
+      time series. Not signal processing, fault detection, or anomaly
+      detection in mechanical or infrastructure systems.
+
+  system_identification:
+    folder: bucket6
+    keywords:
+      - nonlinear system identification
+      - parameter-varying systems
+      - transfer function estimation
+      - NARMAX
+      - block-oriented models
+      - state-space models
+    description: >
+      Data-driven identification of dynamical input-output systems whose
+      response varies with operating conditions and exogenous drivers.
+      Linear parameter-varying identification where model coefficients are
+      scheduled by measured variables, nonlinear autoregressive models with
+      exogenous inputs (NARX and NARMAX) with term and structure selection,
+      block-oriented Hammerstein and Wiener models coupling static
+      nonlinearities with linear dynamics, sparse regression for governing
+      equations, Koopman operator and dynamic mode decomposition with
+      control, and grey-box and physics-informed state-space models.
+      Estimation of transfer functions and impulse responses,
+      capacitance-resistance and Windkessel analog models, free-run
+      simulation error versus one-step-ahead prediction error, model
+      validity and residual testing, and identifiability and persistency of
+      excitation under limited or passively excited data. Applied to
+      physical and environmental systems including plant water transport
+      and soil-plant-atmosphere dynamics.
